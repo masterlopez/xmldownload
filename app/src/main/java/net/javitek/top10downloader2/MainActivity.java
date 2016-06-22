@@ -18,6 +18,7 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
 
     //private TextView xmlTextView;
+    private String mFileContents;
     private Button btnParse;
     private ListView listApps;
 
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO: Add parse activation code
+                ParseApplication parseApplication = new ParseApplication(mFileContents);
+                parseApplication.process();
             }
         });
 
@@ -48,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     // progress bar. This time we will not use it, String - Actual result or response that comes back.
     private class DownloadData extends AsyncTask<String, Void, String> {
 
-        private String mFileContents;
+
 
         // Use Code->Generate->Override Methods (Or Ctrl-O)
         @Override
