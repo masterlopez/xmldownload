@@ -1,10 +1,12 @@
 package net.javitek.top10downloader2;
 
 import android.os.AsyncTask;
+import android.support.annotation.MainThread;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,9 +34,14 @@ public class MainActivity extends AppCompatActivity {
         btnParse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Add parse activation code
+
                 ParseApplication parseApplication = new ParseApplication(mFileContents);
                 parseApplication.process();
+                // Array adapter to add the result text into the text view.
+                // Parameters are Context, layout, list of the array.
+                ArrayAdapter<Application> arrayAdapter = new ArrayAdapter<Application>(
+                        MainActivity.this, R.layout.list_item, parseApplication.getApplications());
+                listApps.setAdapter(arrayAdapter);
             }
         });
 
